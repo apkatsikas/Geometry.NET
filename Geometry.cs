@@ -1,12 +1,13 @@
-﻿namespace Geometry
+﻿using System.Numerics;
+
+namespace Geometry
 {
   class Calculator
   {
-    public void rotatePoint(double pointX, double pointY, double centerX, double centerY, double rotation)
+    public void rotatePoint(Vector2 point, Vector2 center, double rotationRadians)
     {
-      var rad = degreesToRadians(rotation);
-      var newX = (pointX-centerX)*Math.Cos(rad) - (pointY-centerY)*Math.Sin(rad) + centerX;
-      var newY = (pointX-centerX)*Math.Sin(rad) + (pointY-centerY)*Math.Cos(rad) + centerY;
+      var newX = (point.X - center.X)*Math.Cos(rotationRadians) - (point.Y-center.Y)*Math.Sin(rotationRadians) + center.X;
+      var newY = (point.X-center.X)*Math.Sin(rotationRadians) + (point.Y-center.Y)*Math.Cos(rotationRadians) + center.Y;
       Console.WriteLine("{0},{1}", newX, newY);
     }
 
@@ -16,8 +17,13 @@
 
     static void Main(string[] _)
     {
+      var point = new Vector2(5,-1);
+      var center =  new Vector2(0,0);
+      var rotation = -90;
+
+
       var calc = new Calculator();
-      calc.rotatePoint(5,-1, 0,0, -90);
+      calc.rotatePoint(point, center, calc.degreesToRadians(rotation));
     }
   }
 }
