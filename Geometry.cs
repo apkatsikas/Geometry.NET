@@ -3,7 +3,7 @@
   class Calculator
   {
     public void rotatePoint(double pointX, double pointY, double centerX, double centerY, double rotation)
-    {;
+    {
       var rad = degreesToRadians(rotation);
       var newX = (pointX-centerX)*Math.Cos(rad) - (pointY-centerY)*Math.Sin(rad) + centerX;
       var newY = (pointX-centerX)*Math.Sin(rad) + (pointY-centerY)*Math.Cos(rad) + centerY;
