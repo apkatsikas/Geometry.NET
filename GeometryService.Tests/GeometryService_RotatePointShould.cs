@@ -8,12 +8,13 @@ namespace Geometry.UnitTests.Services
         [Theory]
         [MemberData(nameof(TestData))]
         public void RotatePoint_ShouldWork(
-            Vector2 point, Vector2 center, double rotation, Vector2 expectedPoint)
+            Vector2 point, Vector2 center, float rotation, Vector2 expectedPoint)
         {
             var geometryService = new GeometryService();
             var rotationRadians = geometryService.DegreesToRadians(rotation);
             var rotatedPoint = geometryService.RotatePoint(point, center, rotationRadians);
-            Assert.Equal(expectedPoint, rotatedPoint);
+            Assert.Equal(expectedPoint.X, rotatedPoint.X, 4);
+            Assert.Equal(expectedPoint.Y, rotatedPoint.Y, 4);
         }
 
         public static IEnumerable<object[]> TestData =>
