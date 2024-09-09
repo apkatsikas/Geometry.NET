@@ -36,6 +36,22 @@ namespace Geometry.UnitTests.Services
                         new Vector2(12,-2),
                         new Vector2(10,0),
                 ])},
+                
+                new object[] {
+                    new Shape([
+                        new Vector2(4,5),
+                        new Vector2(4,2),
+                        new Vector2(6,2),
+                        new Vector2(6,5),
+                ]),
+                new Vector2(10,4),
+                90,
+                new Shape([
+                        new Vector2(9,-2),
+                        new Vector2(12,-2),
+                        new Vector2(12,-2),
+                        new Vector2(12,0),
+                ])},
             };
     }
 }
