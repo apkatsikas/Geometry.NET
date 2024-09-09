@@ -36,8 +36,8 @@ namespace Geometry.Services
             var rotationCos = (float)Math.Cos(rotationRadians);
             var rotationSin = (float)Math.Sin(rotationRadians);
 
-            var newX = xDiffFromCenter * rotationCos - yDiffFromCenter * rotationSin + center.X;
-            var newY = xDiffFromCenter * rotationSin + yDiffFromCenter * rotationCos + center.Y;
+            var newX = (xDiffFromCenter * rotationCos) - (yDiffFromCenter * rotationSin) + center.X;
+            var newY = (xDiffFromCenter * rotationSin) + (yDiffFromCenter * rotationCos) + center.Y;
             return new Vector2(newX, newY);
         }
 
