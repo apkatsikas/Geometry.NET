@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Drawing;
+using System.Numerics;
 
 namespace Geometry.Services
 {
@@ -7,6 +8,46 @@ namespace Geometry.Services
 
         public Shape(Vector2[] points) {
             this.points = points;
+        }
+        public Shape() {
+
+        }
+        public bool Equals(Shape other)
+        {
+            var pointsCount = points.Count();
+            var otherShapePointsCount = other.points.Count();
+
+            if (pointsCount != otherShapePointsCount) {
+                return false;
+            }
+            for (int i=0; i<pointsCount;i++) {
+                var equal = Math.Abs(points[i].X - other.points[i].X) < 1e-4 
+                    && Math.Abs(points[i].Y - other.points[i].Y) < 1e-4;
+                if (!equal) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Shape other)
+            {
+                return Equals(other);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            // Create a hash code by combining the hash codes of all points
+            int hash = 19;
+            foreach (var point in points)
+            {
+                hash = hash * 31 + point.GetHashCode();
+            }
+            return hash;
         }
     }
     public class GeometryService
@@ -20,11 +61,15 @@ namespace Geometry.Services
 
         public Shape RotateShape(Shape shape, Vector2 center, float rotationRadians)
         {
-            var rotatedShape = new Shape([]);
-            foreach(var point in shape.points) {
-                var rotatedPoint = RotatePoint(point, center, rotationRadians);
-                rotatedShape.points.Append(rotatedPoint);
+            var rotatedShape = new Shape();
+            var pointsCount = shape.points.Count();
+            rotatedShape.points = new Vector2[pointsCount];
+
+            for (int i=0; i<pointsCount; i++) {
+                var rotatedPoint = RotatePoint(shape.points[i], center, rotationRadians);
+                rotatedShape.points[i] = rotatedPoint;
             }
+
             return rotatedShape;
         }
 

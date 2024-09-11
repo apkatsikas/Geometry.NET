@@ -1,5 +1,6 @@
 using Geometry.Services;
 using System.Numerics;
+using Xunit.Abstractions;
 
 namespace Geometry.UnitTests.Services
 {
@@ -14,10 +15,7 @@ namespace Geometry.UnitTests.Services
             var rotationRadians = geometryService.DegreesToRadians(rotation);
             var rotatedShape = geometryService.RotateShape(shape, center, rotationRadians);
 
-            for (int i=0; i<rotatedShape.points.Count(); i++) {
-                Assert.Equal(expectedShape.points[i].X, rotatedShape.points[i].X, 4);
-                Assert.Equal(expectedShape.points[i].Y, rotatedShape.points[i].Y, 4);
-            }
+            Assert.Equal(expectedShape, rotatedShape);
         }
 
         public static IEnumerable<object[]> TestData =>
@@ -49,8 +47,8 @@ namespace Geometry.UnitTests.Services
                 new Shape([
                         new Vector2(9,-2),
                         new Vector2(12,-2),
-                        new Vector2(12,-2),
                         new Vector2(12,0),
+                        new Vector2(9,0),
                 ])},
             };
     }
